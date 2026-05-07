@@ -1,0 +1,22 @@
+all: false
+dir: .
+filename: storage_base_mocks_test.go
+pkgname: pgfw
+formatter: goimports
+log-level: info
+structname: '{{.Mock}}{{.InterfaceName}}'
+recursive: false
+template: testify
+packages:
+  github.com/Deimvis-go/xpg/pg:
+    config:
+      all: false
+      include-interface-regex: (PoolManager|Conn)
+      replace-type:
+        github.com/Deimvis-go/xpg/pg/internal/types:
+          OwnedConn:
+            pkg-path: github.com/Deimvis-go/xpg/pg/pgconn
+            type-name: OwnedConn
+          ConnMode:
+            pkg-path: github.com/Deimvis-go/xpg/pg/pgconn
+            type-name: Mode
