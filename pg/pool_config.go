@@ -5,9 +5,9 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/jackc/pgx/v5"
 	"github.com/Deimvis/go-ext/go1.25/xoptional"
-	"github.com/Deimvis/models/utility/golang/dmutil"
+	"github.com/Deimvis/models/utility/go/dmutil"
+	"github.com/jackc/pgx/v5"
 )
 
 type AfterConnectFn func(ctx context.Context, conn *pgx.Conn) error

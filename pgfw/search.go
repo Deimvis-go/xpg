@@ -3,9 +3,9 @@ package pgfw
 import (
 	"context"
 
-	"github.com/jackc/pgx/v5"
 	"github.com/Deimvis-go/xpg/pg"
-	"github.com/Deimvis/models/utility/golang/dmutil"
+	"github.com/Deimvis/models/utility/go/dmutil"
+	"github.com/jackc/pgx/v5"
 )
 
 type SearchResultRow interface {

@@ -3,9 +3,9 @@ package pgfw
 import (
 	"slices"
 
-	"github.com/doug-martin/goqu/v9"
 	"github.com/Deimvis/go-ext/go1.25/ext"
-	"github.com/Deimvis/models/utility/golang/dmutil"
+	"github.com/Deimvis/models/utility/go/dmutil"
+	"github.com/doug-martin/goqu/v9"
 )
 
 // TODO: rename to ColSortKey
