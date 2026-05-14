@@ -1,7 +1,7 @@
 github.com/DATA-DOG/go-sqlmock v1.5.0 h1:Shsta01QNfFxHCfpW6YH2STWB0MudeXXEWMr20OEh60=
 github.com/DATA-DOG/go-sqlmock v1.5.0/go.mod h1:f/Ixk793poVmq4qj/V1dPUg2JEAKC73Q5eFN3EC/SaM=
-github.com/Deimvis-go/logs v0.1.0 h1:ej+/8yPSqsjKhylZUd6z8lwIuwsfvgHUk4+F4Wpzrdw=
-github.com/Deimvis-go/logs v0.1.0/go.mod h1:4ZbLYTEY79f+B2On6Zw7wAwroVCGb5jIx0xvypPg5Uc=
+github.com/Deimvis-go/logs v0.2.0 h1:9pUeHe6WOC0PvLy9ZyfPcIS6unhYP67r1GRW9zeQ254=
+github.com/Deimvis-go/logs v0.2.0/go.mod h1:bnNKA7XjVXKR1+E1LrAv8b9ds2wAGxo62j+vJ2X6Qbo=
 github.com/Deimvis-go/valid v0.2.0 h1:scaYHZaAZ8NSUAzGaKKWGcymUdLbAwomOOsEmdWV4fQ=
 github.com/Deimvis-go/valid v0.2.0/go.mod h1:IOT9QH8smc3ZwqWsQ6xoJqvLnqhSsOJl4CPs+e52j3s=
 github.com/Deimvis-go/xprometheus v0.1.1 h1:vQog+v4foJ4OWxpzdEX/CEQp65JnkUvLBP2Hd6/gBuQ=
