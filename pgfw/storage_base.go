@@ -10,7 +10,7 @@ import (
 	"github.com/Deimvis-go/xpg/pg/pgconn"
 	"github.com/Deimvis-go/xpg/pg/pgconn/pgconnprovider"
 	"github.com/Deimvis-go/xpg/pg/pgpool"
-	"github.com/Deimvis-go/xprometheus/xprometheus"
+	"github.com/Deimvis-go/xprometheus/prom"
 )
 
 func NewStorageBase(pm pg.PoolManager, lg logs.KVCtxLogger, opts ...StorageBaseOption) *StorageBase {
@@ -30,7 +30,7 @@ func NewStorageBase(pm pg.PoolManager, lg logs.KVCtxLogger, opts ...StorageBaseO
 			if attempt.Index > 0 {
 				lg.Info(ectx.Context(), pgConnAcquireFallbackLogMsg,
 					"ind", attempt.Index,
-					"acquire_type", attempt.AcquireTypeOr(xprometheus.LabelUnknown))
+					"acquire_type", attempt.AcquireTypeOr(prom.LabelUnknown))
 			}
 			return nil
 		},

@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/Deimvis-go/xprometheus/xprometheus"
+	"github.com/Deimvis-go/xprometheus/prom"
 )
 
 func (f *fallbacked) Stats() FallbackedStats {
@@ -31,14 +31,14 @@ type FallbackedStatsSnapshot struct {
 }
 
 func NewFallbackedPrometheusMetrics(s FallbackedPrometheusMetricsStruct) FallbackedPrometheusMetrics {
-	return xprometheus.NewStructMetricGroup(s)
+	return prom.NewStructMetricGroup(s)
 }
 
-type FallbackedPrometheusMetrics = *xprometheus.StructMetricGroup[FallbackedPrometheusMetricsStruct]
+type FallbackedPrometheusMetrics = *prom.StructMetricGroup[FallbackedPrometheusMetricsStruct]
 
 type FallbackedPrometheusMetricsStruct struct {
 	// variable labels: ["ind", "acquire_type"]
-	AcquireAttempt *xprometheus.IntervalMetricGroup
+	AcquireAttempt *prom.IntervalMetricGroup
 }
 
 type fallbackedStats struct {
@@ -76,11 +76,11 @@ func (fs *fallbackedStats) recordAttempt(attempt FallbackedAttemptState, fn func
 	ls := make(prometheus.Labels)
 	if attempt.Index < 100 {
 		ls["ind"] = strconv.FormatInt(int64(attempt.Index), 10)
-		ls["acquire_type"] = attempt.AcquireTypeOr(xprometheus.LabelUnknown)
+		ls["acquire_type"] = attempt.AcquireTypeOr(prom.LabelUnknown)
 	} else {
 		// avoid labels high cardinality
-		ls["ind"] = xprometheus.LabelHighCardinality
-		ls["acquire_type"] = xprometheus.LabelHighCardinality
+		ls["ind"] = prom.LabelHighCardinality
+		ls["acquire_type"] = prom.LabelHighCardinality
 	}
 	for _, e := range promExports {
 		if e.Struct().AcquireAttempt != nil {

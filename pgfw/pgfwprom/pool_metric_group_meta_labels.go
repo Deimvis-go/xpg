@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/Deimvis/go-ext/go1.25/ext"
-	"github.com/Deimvis-go/xprometheus/xprometheus/xprommetric"
+	"github.com/Deimvis-go/xprometheus/prom/prommetric"
 )
 
 // SetMetaLebls allows to pre-set constant meta labels.
@@ -103,9 +103,9 @@ func (pm *ConnPoolMetrics) PrecompileMetaLabels() error {
 			if err != nil {
 				return err
 			}
-			s.ConnAcquireDurationTotal = xprommetric.NewHavingUnit(
+			s.ConnAcquireDurationTotal = prommetric.NewHavingUnit(
 				new,
-				xprommetric.UnitScaler[time.Duration, float64](s.ConnAcquireDurationTotal),
+				prommetric.UnitScaler[time.Duration, float64](s.ConnAcquireDurationTotal),
 			)
 			return nil
 		},
@@ -123,9 +123,9 @@ func (pm *ConnPoolMetrics) PrecompileMetaLabels() error {
 			if err != nil {
 				return err
 			}
-			s.ConnAcquireConnAvailabilityWaitTimeTotal = xprommetric.NewHavingUnit(
+			s.ConnAcquireConnAvailabilityWaitTimeTotal = prommetric.NewHavingUnit(
 				new,
-				xprommetric.UnitScaler[time.Duration, float64](s.ConnAcquireConnAvailabilityWaitTimeTotal),
+				prommetric.UnitScaler[time.Duration, float64](s.ConnAcquireConnAvailabilityWaitTimeTotal),
 			)
 			return nil
 		},

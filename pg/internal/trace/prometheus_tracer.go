@@ -11,7 +11,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/Deimvis/go-ext/go1.25/xoptional"
 	"github.com/Deimvis-go/xpg/pg/pgconn"
-	"github.com/Deimvis-go/xprometheus/xprometheus"
+	"github.com/Deimvis-go/xprometheus/prom"
 	"go.uber.org/fx"
 )
 
@@ -81,8 +81,8 @@ func (t *PrometheusTracer) TraceQueryStart(ctx context.Context, _ *pgx.Conn, dat
 	ctx, _ = ctxValueOrSetLazy(ctx, queryStartCtxKey{}, time.Now)
 	meta := ctxValueOr(ctx, queryMetaCtxKey{}, QueryMeta{})
 	labels := prometheus.Labels{
-		"query_name": xoptional.ValueOr(meta.QueryName, xprometheus.LabelUnknown),
-		"conn_mode":  xoptional.ValueCastOr(meta.ConnMode, pgconn.Mode.String, xprometheus.LabelUnknown),
+		"query_name": xoptional.ValueOr(meta.QueryName, prom.LabelUnknown),
+		"conn_mode":  xoptional.ValueCastOr(meta.ConnMode, pgconn.Mode.String, prom.LabelUnknown),
 	}
 	if t.queryStartCounter != nil {
 		t.queryStartCounter.With(labels).Inc()
@@ -107,8 +107,8 @@ func (t *PrometheusTracer) TraceQueryEnd(ctx context.Context, conn *pgx.Conn, da
 		}
 	}
 	labels := prometheus.Labels{
-		"query_name": xoptional.ValueOr(meta.QueryName, xprometheus.LabelUnknown),
-		"conn_mode":  xoptional.ValueCastOr(meta.ConnMode, pgconn.Mode.String, xprometheus.LabelUnknown),
+		"query_name": xoptional.ValueOr(meta.QueryName, prom.LabelUnknown),
+		"conn_mode":  xoptional.ValueCastOr(meta.ConnMode, pgconn.Mode.String, prom.LabelUnknown),
 		"error":      errStr,
 	}
 	if t.queryFinishCounter != nil {
@@ -123,7 +123,7 @@ func (t *PrometheusTracer) TraceAcquireStart(ctx context.Context, p *pgxpool.Poo
 	ctx, _ = ctxValueOrSetLazy(ctx, acquireStartCtxKey{}, time.Now)
 	meta := ctxValueOr(ctx, connAcquireMetaCtxKey{}, ConnAcquireMeta{})
 	labels := prometheus.Labels{
-		"conn_mode": xoptional.ValueCastOr(meta.ConnMode, pgconn.Mode.String, xprometheus.LabelUnknown),
+		"conn_mode": xoptional.ValueCastOr(meta.ConnMode, pgconn.Mode.String, prom.LabelUnknown),
 	}
 	if t.connAcquireStartCounter != nil {
 		t.connAcquireStartCounter.With(labels).Inc()
@@ -148,7 +148,7 @@ func (t *PrometheusTracer) TraceAcquireEnd(ctx context.Context, p *pgxpool.Pool,
 		}
 	}
 	labels := prometheus.Labels{
-		"conn_mode": xoptional.ValueCastOr(meta.ConnMode, pgconn.Mode.String, xprometheus.LabelUnknown),
+		"conn_mode": xoptional.ValueCastOr(meta.ConnMode, pgconn.Mode.String, prom.LabelUnknown),
 		"error":     errStr,
 	}
 	if t.connAcquireFinishCounter != nil {
@@ -173,7 +173,7 @@ func (t *PrometheusTracer) TraceRelease(pool *pgxpool.Pool, d pgxpool.TraceRelea
 		// 	connMode := "rw"
 		// }
 		labels := prometheus.Labels{
-			"conn_mode": xprometheus.LabelUnknown,
+			"conn_mode": prom.LabelUnknown,
 		}
 		t.connReleaseCounter.With(labels).Inc()
 	}
@@ -186,7 +186,7 @@ func (t *PrometheusTracer) TraceConnectStart(ctx context.Context, _ pgx.TraceCon
 	// TODO: support connect-specific meta
 	// meta := ctxValueOr(ctx, connectMetaCtxKey{}, ConnectMeta{})
 	labels := prometheus.Labels{
-		"conn_mode": xoptional.ValueCastOr(ameta.ConnMode, pgconn.Mode.String, xprometheus.LabelUnknown),
+		"conn_mode": xoptional.ValueCastOr(ameta.ConnMode, pgconn.Mode.String, prom.LabelUnknown),
 	}
 	if t.connectStartCounter != nil {
 		t.connectStartCounter.With(labels).Inc()
@@ -213,7 +213,7 @@ func (t *PrometheusTracer) TraceConnectEnd(ctx context.Context, data pgx.TraceCo
 		}
 	}
 	labels := prometheus.Labels{
-		"conn_mode": xoptional.ValueCastOr(ameta.ConnMode, pgconn.Mode.String, xprometheus.LabelUnknown),
+		"conn_mode": xoptional.ValueCastOr(ameta.ConnMode, pgconn.Mode.String, prom.LabelUnknown),
 		"error":     errStr,
 	}
 	if t.connectFinishCounter != nil {

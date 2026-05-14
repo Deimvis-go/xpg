@@ -14,7 +14,7 @@ import (
 	"github.com/Deimvis/go-ext/go1.25/xoptional"
 	"github.com/Deimvis/go-ext/go1.25/xptr"
 	"github.com/Deimvis-go/xpg/pg/pgconn"
-	"github.com/Deimvis-go/xprometheus/xprometheus"
+	"github.com/Deimvis-go/xprometheus/prom"
 )
 
 func NewDebugVarsTracer(varsRootName string) *DebugVarsTracer {
@@ -57,7 +57,7 @@ func (t *DebugVarsTracer) TraceAcquireStart(ctx context.Context, p *pgxpool.Pool
 	debugInfo.acquireId = acquireId
 	debugInfo.SetStartStack()
 	debugInfo.startTs = startTime.Unix()
-	debugInfo.connMode = xoptional.ValueCastOr(meta.ConnMode, pgconn.Mode.String, xprometheus.LabelUnknown)
+	debugInfo.connMode = xoptional.ValueCastOr(meta.ConnMode, pgconn.Mode.String, prom.LabelUnknown)
 	t.acquired.Write(func(m map[string]any) {
 		m[acquireId] = debugInfo
 	})

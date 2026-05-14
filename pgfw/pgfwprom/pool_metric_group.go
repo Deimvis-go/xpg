@@ -9,13 +9,13 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 
 	"github.com/Deimvis/go-ext/go1.25/xoptional"
-	"github.com/Deimvis-go/xprometheus/xprometheus"
-	"github.com/Deimvis-go/xprometheus/xprometheus/xprommetric"
+	"github.com/Deimvis-go/xprometheus/prom"
+	"github.com/Deimvis-go/xprometheus/prom/prommetric"
 )
 
 func NewConnPoolMetrics(pms ConnPoolMetricsStruct) ConnPoolMetrics {
 	return ConnPoolMetrics{
-		StructMetricGroup: xprometheus.NewStructMetricGroup(pms),
+		StructMetricGroup: prom.NewStructMetricGroup(pms),
 		mls:               xoptional.New[ConnPoolMetaLabels](),
 		mlsPrecompiled:    false,
 
@@ -26,7 +26,7 @@ func NewConnPoolMetrics(pms ConnPoolMetricsStruct) ConnPoolMetrics {
 }
 
 type ConnPoolMetrics struct {
-	*xprometheus.StructMetricGroup[ConnPoolMetricsStruct]
+	*prom.StructMetricGroup[ConnPoolMetricsStruct]
 	mls            xoptional.T[ConnPoolMetaLabels]
 	mlsPrecompiled bool
 
@@ -63,13 +63,13 @@ type ConnPoolMetricsStruct struct {
 	// in pgx stats ConnAcquireDurationTotal == ConnAcquireConnAvailabilityWaitTimeTotal
 	// (they are the same)
 	ConnAcquireCount         *prometheus.CounterVec
-	ConnAcquireDurationTotal xprommetric.HavingUnit[
+	ConnAcquireDurationTotal prommetric.HavingUnit[
 		*prometheus.CounterVec,
 		time.Duration,
 		float64,
 	]
 	ConnAcquireCancelledCount                *prometheus.CounterVec
-	ConnAcquireConnAvailabilityWaitTimeTotal xprommetric.HavingUnit[
+	ConnAcquireConnAvailabilityWaitTimeTotal prommetric.HavingUnit[
 		*prometheus.CounterVec,
 		time.Duration,
 		float64,

@@ -6,6 +6,8 @@ github.com/Deimvis-go/valid v0.1.0 h1:6b8hi7T2K9nvMhY/Tt0/RvWKfMn8hSgtDEUh55W65L
 github.com/Deimvis-go/valid v0.1.0/go.mod h1:4Ef5A3El5EDeoNZuvdyGVUkki02CQFqfu1nBw761rqI=
 github.com/Deimvis-go/xprometheus v0.1.0 h1:vLkr86rSwOr87LDhnrhAWAH7y+KwkKVqmWo8f7jFEdo=
 github.com/Deimvis-go/xprometheus v0.1.0/go.mod h1:Cuz0/wPLZ+9ZLpDbtr4L1pJ4Wxp1oU3cvUAn0qyOOE8=
+github.com/Deimvis-go/xprometheus v0.1.1 h1:vQog+v4foJ4OWxpzdEX/CEQp65JnkUvLBP2Hd6/gBuQ=
+github.com/Deimvis-go/xprometheus v0.1.1/go.mod h1:tQqTlDnJ2xQdDVXwdG/guc0Y7dS9MFOidGGf6PXIIrA=
 github.com/Deimvis/go-ext/go1.25 v0.1.0 h1:l5dJYyHjXUYPLQhs7TaPIJdL0u9Wvmj+nAVoWpRje44=
 github.com/Deimvis/go-ext/go1.25 v0.1.0/go.mod h1:dkOutB9nOmzLxQkH3Uh9OzR6A5EKbaZYaqUaoBzIOOQ=
 github.com/Deimvis/models v0.0.0-20260423131344-511006920a46 h1:Y/7QwoqIm3MdfmHShvnrDEbLeFVms7lhyZWHhBYtLhg=
